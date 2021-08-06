@@ -1,4 +1,6 @@
 import os
+import argparse
+import sys
 
 def removeTrails(lines):
     '''Removes trailing whitespaces from strings in list lines and returns list'''
@@ -20,7 +22,7 @@ def fileToSet(filePath):
 def union(file1Path, file2Path):
     '''Returns union of files'''
     file1 = fileToSet(file1Path)
-    file2 = fileToSet(pfile2Path)
+    file2 = fileToSet(file2Path)
     return file1 + [line for line in file2 if line not in file1]
 
 def intersection(file1Path, file2Path):
@@ -35,44 +37,29 @@ def difference(file1Path, file2Path):
     file2 = fileToSet(file2Path)
     return [line for line in file1 if line not in file2]
 
-def takeInput():
-    '''Prompts user for input and returns input'''
-    while True:    
-        file1Path = input("First file's path: ")
-        if os.path.exists(file1Path):
-            break
-        print('File not found! Try Again!')
-
-    while True:
-        file2Path = input("Second file's path: ")
-        if os.path.exists(file2Path):
-            break
-        print('File not found! Try Again!')
-        
-    while True:
-        op = (input("Operation: ")).lower()
-        if op in ['union', 'intersection', 'difference']:
-            break
-        print('Not an operation (union, intersection, difference)! Try Again!')
-        
-    return file1Path, file2Path, op
-
 def printLines(lines):
     '''Prints lines in list lines'''
     for line in lines:
-        print(line)
-        
+        sys.stdout.write(line+'\n')
+   
+def result(args):
+    '''Takes argument and returns the result of the set operation'''
+    if args.op=='union':
+        return union(args.file1Path, args.file2Path)
+
+    elif args.op=='intersection':
+        return intersection(args.file1Path, args.file2Path)
+
+    elif args.op=='difference':
+        return difference(args.file1Path, args.file2Path)
+
 def main():
-    file1Path, file2Path, op = takeInput()
-
-    if op=='union':
-        printLines(union(file1Path, file2Path))
-
-    elif op=='intersection':
-        printLines(intersection(file1Path, file2Path))
-
-    elif op=='difference':
-        printLines(difference(file1Path, file2Path))
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument('op', help='What operation? Can choose union, intersection, or difference')
+    parser.add_argument('file1Path', help='First file path?')
+    parser.add_argument('file2Path', help='Second file path?')
+    args = parser.parse_args()
+    printLines(result(args))
+        
 if __name__ == '__main__':
     main()
