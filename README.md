@@ -1,2 +1,1 @@
-# file-set
-Doing set operations on files considered as sets of lines
+Find union, intersection, difference, etc of files considered as set of lines.
