@@ -1,5 +1,10 @@
 Find union, intersection, difference, etc of files considered as set of lines.
 
+### Operations-
+- union
+- intersection
+- difference
+
 ### Installation
 ```
 git clone https://github.com/daspartho/file-set.git
