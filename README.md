@@ -9,9 +9,9 @@ CLI tool that can be used to do set operations like union on files considering t
   `\r\n` and the other in `\r`.
 
 ### Operations
-- union
-- intersection
-- difference
+- `union x y` outputs the lines that occur in either `x` or `y` or both.
+- `intersection x y` outputs the lines that occur in both `x` and `y`.
+- `difference x y` outputs the lines that occur in `x` but not in `y`.
 
 ### Installation
 ```
