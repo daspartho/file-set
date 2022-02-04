@@ -12,6 +12,11 @@ CLI tool that can be used to do set operations like union on files considering t
 - `union x y` outputs the lines that occur in either `x` or `y` or both.
 - `intersection x y` outputs the lines that occur in both `x` and `y`.
 - `difference x y` outputs the lines that occur in `x` but not in `y`.
+- `is-subset x y` outputs whether all the lines in `x` are present in `y`.
+- `is-superset x y` outputs whether all the lines in `y` are present in `x`.
+- `is-equal x y` outputs whether all the lines in `x` are present in `y` and vice-versa.
+- `is-disjoint x y` outputs whether there are no lines in common in `x` and `y`.
+- `symmetric-difference x y` outputs the lines that occur in `x` but not in `y` and vice-versa.
 
 ### Installation
 ```
@@ -28,7 +33,3 @@ python main.py <operation> <first file> <second file>
 ```
 python main.py union test.py temp.txt
 ```
-
-### TODO
-- symetric difference
-- is subset
