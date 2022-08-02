@@ -2,22 +2,16 @@ import os
 import argparse
 import sys
 
-def removeTrails(lines):
-    '''Removes trailing whitespaces from strings in list lines and returns list'''
-    return [line.rstrip() for line in lines]
-
-def removeEmptyLines(lines):
-    '''Removes empty string with whitespaces from list lines and returns list'''
-    return [line for line in lines if line.strip()]
-
-def removeDuplicates(lines):
-    '''Removes duplicate elements from list lines and returns list'''
-    return [i for n, i in enumerate(lines) if i not in lines[:n]]
-
 def fileToSet(filePath):
     '''Returns a set of lines from file'''
+    lineSet=[]
     with open(filePath) as file:
-        return removeTrails(removeDuplicates(removeEmptyLines(file.readlines())))
+        lines = file.readlines()
+        for n, line in enumerate(lines):
+            if line.strip(): # False for empty lines with whitespaces and thus removes them
+                if line not in lines[:n]: # False for duplicate lines and thus removes them
+                    lineSet.append(line.rstrip()) # Removes trailing whitespaces from line and appends it to lineSet
+    return lineSet
 
 def union(file1Path, file2Path):
     '''Returns union of files'''
